@@ -9,12 +9,6 @@ import org.springframework.ui.ModelMap;
 
 public class BaseAction {
 	
-	public static final String PAGE_PARAM = "page_param";
-	public static final String RESULT = "result";
-	
-	public static final String AJAX_URL = "commons/ajax";
-	
-	public static final String AJAX_MSG = "jsonString";
 	
 	public Log log = LogFactory.getLog(this.getClass());
 	
