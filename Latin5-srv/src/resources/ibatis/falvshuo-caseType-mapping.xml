@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="fls_case_type">  
+    <typeAlias alias="caseType" type="com.falvshuo.bean.CaseTypeBean"/>
+	<resultMap class="caseType" id="rs_caseType">
+		<result property="id" column="id" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+		<result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+		<result property="parentId" column="parent_id" javaType="java.lang.Integer" jdbcType="NUMBER" nullValue="0"/>
+		<result property="orderNum" column="order_num" javaType="java.lang.Integer" jdbcType="NUMBER" nullValue="1"/>
+		<result property="img" column="img" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+		<result property="createDate" column="create_date" javaType="java.lang.String" jdbcType="DATETIME"/>
+		<result property="createUserId" column="create_user_id" javaType="java.lang.Integer" jdbcType="NUMBER" nullValue="0"/>
+		<result property="createUserName" column="create_user_name" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+		<result property="updateDate" column="update_date" javaType="java.lang.String" jdbcType="DATETIME"/>
+		<result property="updateUserId" column="update_user_id" javaType="java.lang.Integer" jdbcType="NUMBER" nullValue="0"/>
+		<result property="updateUserName" column="update_user_name" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+	</resultMap>
+	
+	<select id="toView" resultMap="rs_caseType" parameterClass="java.util.Map" >
+       
+    </select>
+    
+    <select id="toCount" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+    	 
+    </select>
+    
+    <select id="toList" resultMap="rs_caseType" parameterClass="string">
+        select * from fls_case_type
+		$whereSql$
+    </select>
+	
+	<insert id="toInsert" parameterClass="caseType">
+    	
+    </insert>
+	
+	<update id="updateCaseType" parameterClass="java.util.Map">
+		
+	</update>
+	
+	<delete id="deleteCaseType" parameterClass="java.util.Map">
+		 
+	</delete>
+</sqlMap>

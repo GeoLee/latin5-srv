@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation=" 
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd" default-autowire="byName"> 
+    <!-- 用于读 -->
+    <bean id="propertyConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/resources/config/FaduConfig.properties</value>
+		</property>
+	</bean>
+    <bean id="mainDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  >
+        <!--驱动类-->
+        <property name="driverClass">
+            <value>${main.db.driverClassName}</value>
+        </property>
+        <!--url连接串-->
+        <property name="jdbcUrl">
+            <value>${main.db.url}</value>
+        </property>
+        <!--用户名-->
+        <property name="user">
+            <value>${main.db.username}</value>
+        </property>
+        <!--密码-->
+        <property name="password">
+            <value>${main.db.password}</value>
+        </property>
+        <!-- 最小链接数 -->
+         <property name="minPoolSize"><value>2</value></property>
+         <!-- 最大连接数 -->
+          <property name="maxPoolSize"><value>50</value></property>
+          <!-- 最大空闲的时间，单位是秒，无用的链接再过时后会被回收 -->
+          <property name="maxIdleTime"><value>1800</value></property>
+          <!-- 在当前连接数耗尽的时候，一次获取的新的连接数 -->
+          <property name="acquireIncrement"><value>5</value></property>
+          <property name="maxStatements"><value>0</value></property>
+          <!-- 连接池初始化时获取的链接数，介于minPoolSize和maxPoolSize之间 -->
+          <property name="initialPoolSize"><value>3</value></property>
+          <property name="idleConnectionTestPeriod"><value>1800</value></property>
+          <property name="acquireRetryAttempts"><value>30</value></property>
+          <property name="breakAfterAcquireFailure"><value>true</value></property>
+          <property name="testConnectionOnCheckout"><value>false</value></property>
+
+    </bean>
+        
+	<bean id="mainSqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" >
+		<property name="dataSource" ref="mainDataSource" />
+		<property name="configLocation"
+			value="classpath:resources/ibatis/sqlmap-config.xml" />
+	</bean>
+
+
+	
+ 	<context:component-scan base-package="com.falvshuo.dao"  />
+ 	<context:component-scan base-package="com.falvshuo.service"/>
+ 	<context:component-scan base-package="com.falvshuo.action"  />
+ 	
+</beans>
